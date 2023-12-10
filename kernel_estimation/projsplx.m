@@ -1,5 +1,5 @@
 function x = projsplx(y)
-% If you cannot compile the mex code you can use this file instead of the 
+% If you cannot compile the mex code you can use this file instead of the
 % Pplusb.m function, but it will be slower.
 
 % project an n-dim vector y to the simplex Dn
@@ -14,17 +14,17 @@ function x = projsplx(y)
 % http://ufdc.ufl.edu/IR00000353/
 %
 % Jan. 14, 2011.
-% 
-% Edited on Aug. 17, 2016 by Charis Lanaras for the demo of "Hyperspectral 
+%
+% Edited on Aug. 17, 2016 by Charis Lanaras for the demo of "Hyperspectral
 % Super-Resolution by Coupled Spectral Unmixing", ICCV 2015.
 
 m = size(y,1); bget = false;
 x = zeros(size(y));
 
 for jj=1:size(y,2)
-    
+
     s = sort(y(:,jj),'descend'); tmpsum = 0;
-    
+
     for ii = 1:m-1
         tmpsum = tmpsum + s(ii);
         tmax = (tmpsum - 1)/ii;
@@ -33,9 +33,9 @@ for jj=1:size(y,2)
             break;
         end
     end
-    
+
     if ~bget, tmax = (tmpsum + s(m) -1)/m; end;
-    
+
     x(:,jj) = max(y(:,jj)-tmax,0);
 end
 
